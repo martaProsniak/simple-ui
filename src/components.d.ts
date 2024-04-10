@@ -6,56 +6,61 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface SuiModal {
+        "cancelText": string;
+        "confirmText": string;
+        "header": string;
+        "open": () => Promise<void>;
+        "opened": boolean;
+        "showHeader": boolean;
+        "withConfirmation": boolean;
     }
 }
+export interface SuiModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSuiModalElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLSuiModalElementEventMap {
+        "suiUserChoice": boolean;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLSuiModalElement extends Components.SuiModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSuiModalElementEventMap>(type: K, listener: (this: HTMLSuiModalElement, ev: SuiModalCustomEvent<HTMLSuiModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSuiModalElementEventMap>(type: K, listener: (this: HTMLSuiModalElement, ev: SuiModalCustomEvent<HTMLSuiModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSuiModalElement: {
+        prototype: HTMLSuiModalElement;
+        new (): HTMLSuiModalElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "sui-modal": HTMLSuiModalElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface SuiModal {
+        "cancelText"?: string;
+        "confirmText"?: string;
+        "header"?: string;
+        "onSuiUserChoice"?: (event: SuiModalCustomEvent<boolean>) => void;
+        "opened"?: boolean;
+        "showHeader"?: boolean;
+        "withConfirmation"?: boolean;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "sui-modal": SuiModal;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "sui-modal": LocalJSX.SuiModal & JSXBase.HTMLAttributes<HTMLSuiModalElement>;
         }
     }
 }

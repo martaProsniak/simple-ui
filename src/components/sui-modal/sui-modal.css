@@ -1,0 +1,93 @@
+:host {
+  --sui-modal-inner-spacing: 1.2rem;
+  --sui-modal-border: black;
+  --sui-modal-color: black;
+  --sui-modal-color-inverse: white;
+  --sui-modal-hover-color: rgb(66, 66, 66);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  position: relative;
+}
+
+:host([opened]) {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sui-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 26);
+  z-index: 10
+}
+
+.sui-dialog {
+  background-color: white;
+  position: relative;
+  top: 50px;
+  opacity: 0;
+  z-index: 100;
+  width: 50%;
+  min-width: 200px;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+  padding: 1.6rem;
+  font-family: sans-serif;
+}
+
+@media screen and (min-width: 426px) {
+  .sui-dialog {
+    max-width: 500px;
+    width: 60%;
+  }
+}
+
+.sui-dialog--open {
+  top: 120px;
+  opacity: 1;
+}
+
+.sui-dialog-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: var(--sui-modal-inner-spacing);
+  margin-top: 0;
+}
+
+.sui-dialog-content {
+  padding-top: var(--sui-modal-inner-spacing);
+  padding-bottom: var(--sui-modal-inner-spacing);
+}
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sui-dialog-footer {
+  padding-top: var(--sui-modal-inner-spacing);
+  text-align: right;
+}
+
+.sui-btn {
+  margin-left: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 2px var(--sui-modal-border) solid;
+  background-color: var(--sui-modal-color);
+  color: var(--sui-modal-color-inverse);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.sui-btn:hover {
+  background-color: var(--sui-modal-hover-color);
+}
+
+.sui-btn:focus {
+  outline: none;
+}

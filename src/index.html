@@ -9,6 +9,14 @@
     <script nomodule src="/build/simple-ui.js"></script>
   </head>
   <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    <button id="action-btn">Show modal</button>
+    <sui-modal header="Tu modal tu modal"><div class="elo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae a dolorem voluptatum at reprehenderit provident natus eum, quod expedita eius. Eius optio ipsam maiores ab ipsa quidem laboriosam pariatur voluptatem!</div><div class="pomelo">Tu modal</div></sui-modal>
+    <script>
+      const button = document.getElementById('action-btn');
+      const modal = document.querySelector('sui-modal');
+      button.addEventListener('click', () => {
+        modal.open();
+      })
+    </script>
   </body>
 </html>
